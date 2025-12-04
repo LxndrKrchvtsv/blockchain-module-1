@@ -6,6 +6,7 @@ import javax.crypto.IllegalBlockSizeException;
 import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
+import java.nio.charset.StandardCharsets;
 import java.security.*;
 import java.util.Arrays;
 
@@ -53,7 +54,12 @@ public class Main {
 		// Transform bytes of sign to string
 		String transformedSignToString = transformBytesToString(sign);
 
-		System.out.println("Transformed signed message: " + transformedSignToString);
+		System.out.println("Decrypted Message as a string: " + new String(decryptedMessageBytes,
+				StandardCharsets.UTF_8));
+		System.out.println("Decrypted Message Bytes: " + transformBytesToString(decryptedMessageBytes));
+		System.out.println("Public Key: " + transformBytesToString(keyPair.getPrivate().getEncoded()));
+		System.out.println("Private Key: " + transformBytesToString(keyPair.getPublic().getEncoded()));
+		System.out.println("The Sign: " + transformedSignToString);
 	}
 
 	public static byte[] transformHEXStringToByteArray(String hexString) {
